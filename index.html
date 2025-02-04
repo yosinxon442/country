@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Finder</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Where in the world?</h1>
+      <button id="dark-mode-toggle">Dark Mode</button>
+    </header>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search for a country..." />
+      <select id="region-filter">
+        <option value="all">Filter by Region</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">Americas</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </div>
+    <div id="countries-container" class="countries-grid"></div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

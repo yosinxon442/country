@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Details</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .details-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: #f4f4f4;
+      color: #333;
+      text-decoration: none;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .back-btn:hover {
+      background: #e2e2e2;
+    }
+    .country-flag {
+      width: 300px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .map-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .map-link:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container details-container" id="details-container">
+    <a href="index.html" class="back-btn">← Back</a>
+    <div id="country-details"></div>
+  </div>
+
+  <script>
+
+    const countryData = localStorage.getItem("selectedCountry");
+    const detailsDiv = document.getElementById("country-details");
+
+    if (!countryData) {
+      detailsDiv.innerHTML = "<p>Davlat ma'lumotlari topilmadi.</p>";
+    } else {
+      const country = JSON.parse(countryData);
+      
+      let html = `
+        <img src="${country.flags.png}" alt="${country.name.common} Bayrog‘i" class="country-flag">
+        <h2>${country.name.common}</h2>
+        <p><strong>Mintaqa:</strong> ${country.region}</p>
+      `;
+
+      if (country.latlng && country.latlng.length === 2) {
+        const lat = country.latlng[0];
+        const lng = country.latlng[1];
+
+        html += `<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank">
+                   Xaritada korish
+                 </a>`;
+      } else {
+        html += `<p>Xarita malumotlari mavjud emas.</p>`;
+      }
+
+      detailsDiv.innerHTML = html;
+    }
+
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
+</body>
+</html>
